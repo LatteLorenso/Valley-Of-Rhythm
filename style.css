@@ -312,6 +312,8 @@ a.hero-fix-btn {
 
 /* Карточки муда */
 
+/* Карточка-Движение */
+
 .cards-mood {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -321,48 +323,184 @@ a.hero-fix-btn {
 }
 
 .cards-mood .card-motion {
-    background: #38bdf8;
+    display: inline-block;
+    position: relative;
+    background: #ff6b6b;
     width: 100%;
     max-width: 300px;
     height: 450px;
+    overflow: hidden;
     align-content: center;
     text-align: center;
     text-decoration: none;
+    box-shadow: 0 10px 20px rgba(255, 107, 107, 0.4);
 }
 
-.card-motion .overlay {
-    background: rgba(255, 255, 255, 0.5);
-    width: 250px;
-    height: 225px;
+.card-motion::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 1;
+    background-image: url("public/card1.jpg");
+    background-size: cover;
+    background-position: center;
+    border: 5px solid #ff6b6b;
+    z-index: 1;
+    transition: opacity 0.5s ease;
+}
+
+.cards-mood .overlay {
+    position: absolute;
+    inset: 0;
+    top: 112px;
     margin: 0 auto;
+    background: rgba(255, 255, 255, 0.5);
     color: #0f1114;
-    border-radius: 8px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    width: 250px;
+    height: 225px;
+    border-radius: 8px;
     opacity: 0;
     transition: opacity 0.5s ease;
+    z-index: 2;
     padding: 20px;
+    backdrop-filter: blur(2px);
 }
 
-.card-motion .overlay h3 {
+.overlay h3 {
     color: #0f1114;
     font-size: 24px;
     margin-bottom: 5px;
 }
 
-.card-motion .overlay p {
+.overlay p {
     color: #0f1114;
     font-size: 17px;
+}
+
+.card-motion:hover::after {
+    opacity: 0.5;
 }
 
 .card-motion:hover .overlay {
     opacity: 1;
 }
 
-.card-motion a {
+.cards-mood a {
     color: #0f1114;
     text-decoration: none;
+}
+
+/* Карточка-Баланс */
+
+.cards-mood .card-balance {
+    display: inline-block;
+    position: relative;
+    background: #4ade80;
+    width: 100%;
+    max-width: 300px;
+    height: 450px;
+    overflow: hidden;
+    align-content: center;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 10px 20px rgba(74, 222, 128, 0.4);
+}
+
+.card-balance::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 1;
+    background-image: url("public/card2.avif");
+    background-size: cover;
+    background-position: center;
+    border: 5px solid #4ade80;
+    z-index: 1;
+    transition: opacity 0.5s ease;
+}
+
+.card-balance:hover::after {
+    opacity: 0.5;
+}
+
+
+.card-balance:hover .overlay {
+    opacity: 1;
+}
+
+/* Карточка-Концентрация */
+
+.cards-mood .card-focus {
+    display: inline-block;
+    position: relative;
+    background: #3b82f6;
+    width: 100%;
+    max-width: 300px;
+    height: 450px;
+    align-content: center;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.4);
+}
+
+.card-focus::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 1;
+    background-image: url("public/card3.jpg");
+    background-size: cover;
+    background-position: center;
+    border: 5px solid #3b82f6;
+    z-index: 1;
+    transition: opacity 0.5s ease;
+}
+
+.card-focus:hover::after {
+    opacity: 0.5;
+}
+
+.card-focus:hover .overlay {
+    opacity: 1;
+}
+
+/* Карточка-Мечты */
+
+.cards-mood .card-dream {
+    display: inline-block;
+    position: relative;
+    background: #a78bfa;
+    width: 100%;
+    max-width: 300px;
+    height: 450px;
+    align-content: center;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 20px 40px rgba(167, 139, 250, 0.4);
+}
+
+.card-dream::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 1;
+    background-image: url("public/card4.avif");
+    background-size: cover;
+    background-position: center;
+    border: 5px solid #a78bfa;
+    z-index: 1;
+    transition: opacity 0.5s ease;
+}
+
+.card-dream:hover::after {
+    opacity: 0.5;
+}
+
+.card-dream:hover .overlay {
+    opacity: 1;
 }
