@@ -213,7 +213,8 @@ a.hero-fix-btn {
     gap: 60px;
     align-items: center;
     position: relative;
-    min-height: 80vh;
+    min-height: 100vh;
+    height: 400px;
     background-color: rgba(255, 255, 255, 0.3);
     color: #0f1114;
     padding-left: 300px;
@@ -221,6 +222,7 @@ a.hero-fix-btn {
 
 .hero-about-container {
     width: 500px;
+    user-select: none;
 }
 
 .hero-about-container h2 {
@@ -247,13 +249,12 @@ a.hero-fix-btn {
 
 .hero-about-container p {
     color: #0f1114;
-    font-size: 17px;
-    max-width: 700px;
+    font-size: 18px;
     white-space: pre-line;
     font-weight: 400;
     letter-spacing: 1px;
     text-align: left;
-    line-height: 24px;
+    line-height: 1.8;
 }
 
 .hero-about-visual {
@@ -308,6 +309,63 @@ a.hero-fix-btn {
 .visual-box:hover::after {
     opacity: 1;
     background-position: top bottom;
+}
+
+/* Секция осмысления */
+
+.bg-text-section {
+    position: relative;
+    padding: 0;
+    background-color: #fdfbf7;
+    background-image: radial-gradient(
+        rgba(179, 57, 57, 0.25) 1px,
+        transparent 1px
+    );
+    background-size: 20px 20px;
+    overflow: hidden;
+}
+
+.text-section-1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    height: 400px;
+    padding: 80px 20px;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.text-section-1 h3 {
+    color: #0f1114;
+    font-size: 48px;
+    letter-spacing: 1px;
+    line-height: 1.8;
+    font-weight: 600;
+    user-select: none;
+    text-align: center;
+}
+
+.text-divider {
+    width: 80px;
+    height: 3px;
+    margin: 40px auto;
+    background: linear-gradient(
+        135deg,
+        #b33939,
+        rgba(56, 189, 248, 0.7)
+    );
+}
+
+.text-section-1 p {
+    color: rgba(15, 17, 20, 0.75);
+    font-size: 18px;
+    line-height: 1.9;
+    max-width: 800px;
+    margin: 0 auto;
+    letter-spacing: 1px;
+    user-select: none;
+    text-align: left;
 }
 
 /* Карточки муда */
@@ -514,31 +572,35 @@ a.hero-fix-btn {
 /* Первая сцена */
 
 #scene-1 {
-    position: absolute;
-    top: 2180px;
-    left: 0;
+    position: relative;
     width: 100%;
-    min-height: 100vh;
-    z-index: 10;
-    overflow: hidden;
-    background: #f0eeea;
+
+    max-height: 0;
+    min-height: 0;
+
     opacity: 0;
-    user-select: none;
-    pointer-events: none;
+    overflow: hidden;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    background: #f0eeea;
     transform: translateY(-20px);
-    transition: opacity 0.5s ease, 
-    transform 0.6s cubic-bezier(.22,1,.36,1);
+
+    transition:
+        max-height 0.7s cubic-bezier(.22,1,.36,1),
+        opacity 0.6s ease,
+        transform 0.6s cubic-bezier(.22,1,.36,1);
+
+    pointer-events: none;
 }
 
 #scene-1::before {
     content: "";
     position: absolute;
-    width: 600%;
-    height: 600%;
+    inset: -200%;
     background: repeating-linear-gradient(
         135deg,
         rgba(255, 107, 107, 0.4),
@@ -546,10 +608,9 @@ a.hero-fix-btn {
         transparent 1px,
         transparent 40px
     );
-    transform: translate3d(0, 0, 0);
     animation: motion-lines 18s linear infinite;
-    pointer-events: none;
     z-index: 0;
+    pointer-events: none;
 }
 
 @keyframes motion-lines {
@@ -558,6 +619,8 @@ a.hero-fix-btn {
 }
 
 #scene-1:target {
+    max-height: 150vh;
+    min-height: 105vh;
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0);
@@ -596,23 +659,29 @@ a.hero-fix-btn {
 /* Вторая сцена */
 
 #scene-2 {
-    position: absolute;
-    top: 2180px;
-    left: 0;
+    position: relative;
     width: 100%;
-    min-height: 100vh;
-    z-index: 10;
-    overflow: hidden;
-    background: linear-gradient(135deg, #0b411f, #144d29);
+
+    max-height: 0;
+    min-height: 0;
+
     opacity: 0;
-    user-select: none;
-    pointer-events: none;
+    overflow: hidden;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transform: translateY(-20px);
-    transition: opacity 0.5s ease;
+
+    background: linear-gradient(135deg, #0b411f, #144d29);
+    transform: translateY(20px);
+
+    transition: 
+        max-height 0.7s cubic-bezier(.22,1,.36,1),
+        opacity 0.6s ease,
+        transform 0.6s cubic-bezier(.22,1,.36,1);
+
+    pointer-events: none;
 }
 
 #scene-2::before {
@@ -654,6 +723,8 @@ a.hero-fix-btn {
 }
 
 #scene-2:target {
+    max-height: 150vh;
+    min-height: 105vh;
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0);
@@ -686,22 +757,29 @@ a.hero-fix-btn {
 /* Третья сцена */
 
 #scene-3 {
-    position: absolute;
-    top: 2180px;
-    left: 0;
+    position: relative;
     width: 100%;
-    min-height: 100vh;
-    user-select: none;
+
+    max-height: 0;
+    min-height: 0;
+
+    opacity: 0;
+    overflow: hidden;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     background: linear-gradient(135deg, #1a1f29, #0f141c);
-    overflow: hidden;
-    opacity: 0;
-    pointer-events: none;
     transform: translateY(-20px);
-    transition: opacity 0.5s ease, transform 0.6s cubic-bezier(.22,1,.36,1);
+
+    transition: 
+        max-height 0.7s cubic-bezier(.22,1,.36,1),
+        opacity 0.6s ease,
+        transform 0.6s cubic-bezier(.22,1,.36,1);
+
+    pointer-events: none;
 }
 
 #scene-3::before,
@@ -732,6 +810,8 @@ a.hero-fix-btn {
 }
 
 #scene-3:target {
+    max-height: 150vh;
+    min-height: 105vh;
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0);
@@ -765,21 +845,25 @@ a.hero-fix-btn {
 /* Четвертая сцена */
 
 #scene-4 {
-    position: absolute;
-    top: 2180px;
-    left: 0;
+    position: relative;
     width: 100%;
-    min-height: 100vh;
-    overflow: hidden;
-    background: linear-gradient(135deg, #a8e6ff, #c3b1e1);
+
+    max-height: 0;
+    min-height: 0;
+    
     opacity: 0;
     user-select: none;
     pointer-events: none;
+    overflow: hidden;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    background: linear-gradient(135deg, #a8e6ff, #c3b1e1);
     transform: translateY(-20px);
+
     transition: opacity 0.5s ease;
 }
 
@@ -809,6 +893,8 @@ a.hero-fix-btn {
 }
 
 #scene-4:target {
+    max-height: 150vh;
+    min-height: 110vh;
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0);
@@ -824,14 +910,14 @@ a.hero-fix-btn {
 }
 
 #scene-4 h2 {
-    color: white;
+    color: #5f2aff;
     font-size: 48px;
     margin-bottom: 20px;
     text-align: center;
 }
 
 #scene-4 p {
-    color: #8259ff;
+    color: #5f2aff;
     font-size: 24px;
     max-width: 850px;
     text-align: center;
@@ -839,18 +925,52 @@ a.hero-fix-btn {
     margin: 0 auto 60px auto;
 }
 
+/* Секция фокуса */
+
+.text-section-2 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 80px 20px;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.text-section-2 h3 {
+    color: #0f1114;
+    font-size: 48px;
+    letter-spacing: 1px;
+    line-height: 1.8;
+    font-weight: 600;
+    user-select: none;
+    text-align: center;
+}
+
+.text-divider {
+    width: 80px;
+    height: 3px;
+    margin: 40px auto;
+    background: linear-gradient(
+        135deg,
+        #38bdf8,
+        #8b5cf6
+    );
+}
+
+.text-section-2 p {
+    color: rgba(15, 17, 20, 0.75);
+    font-size: 18px;
+    line-height: 1.9;
+    max-width: 800px;
+    margin: 0 auto;
+    letter-spacing: 1px;
+    user-select: none;
+    text-align: left;
+}
+
 /* Футер */
-
-body:has(#scene-1:target) main,
-body:has(#scene-2:target) main,
-body:has(#scene-3:target) main,
-body:has(#scene-4:target) main {
-    margin-bottom: 110vh;
-}
-
-main {
-    transition: margin-bottom 0.6s cubic-bezier(.22,1,.36,1);
-}
 
 footer {
     width: 100%;
@@ -859,12 +979,92 @@ footer {
     justify-content: center;
     align-items: center;
     padding: 20px 0;
-    background-color: rgba(255, 255, 255, 0.02);
+    background: #292929;
     border-top: 1px solid rgb(0, 0, 0, 0.05);
     transition: margin-top 0.6s cubic-bezier(.22,1,.36,1);
 }
 
 footer p {
-    color: #0f1114;
+    color: white;
     font-size: 18px;
+    line-height: 2;
+}
+
+footer a {
+    color: #dd4343;
+    text-decoration: none;
+    transition: border-bottom 0.3s ease;
+}
+
+footer a:hover {
+    width: 100%;
+    left: 100%;
+    border-bottom: 1px solid white;
+}
+
+footer a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #b33939;
+    transition: width 0.3s;
+}
+
+footer a:hover::after {
+    width: 100%;
+}
+
+/* RWD */
+
+@media screen and (max-width: 1200px) {
+    /* Контейнер всего контента */
+    .container {
+        max-width: 1200px;
+    }
+
+    /* Внутренний отступ контента в хеддере */
+    header {
+        padding-left: 100px;
+        padding-right: 70px;
+    }
+
+    /* Внутренний отступ контента в хиро-абауте */
+    .hero-about {
+        padding-left: 100px;
+    }
+
+    /* Внутренние отступы между карточками */
+    .cards-mood {
+        row-gap: 40px;
+        padding: 40px 80px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    /* Контейнер всего контента */
+    .container {
+        max-width: 1024px;
+    }
+
+    /* Внутренний отступ контента в хиро-абауте */
+    .hero-about {
+        padding-left: 100px;
+    }
+
+    .text-section-1 h3 {
+        font-size: 42px;
+    }
+
+    /* Внутренние отступы между карточками */
+    .cards-mood {
+        row-gap: 60px;
+        padding: 40px 80px;
+    }
+
+    .text-section-2 h3 {
+        font-size: 42px;
+    }
 }
