@@ -1,0 +1,897 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Эксклюзивный гид по Киото. Погружение в вечность."><title>KYOTO | The Eternal City</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@200;400;800&display=swap" rel="stylesheet"><style>
+/* ====================================================================
+        GLOBAL VARIABLES & THEME CONFIGURATION
+        ====================================================================
+        */
+
+ :root {
+    /* Palette: Day Mode (Paper & Ink theme) */
+    --bg-body: #fdfbf7;
+    --bg-paper: #ffffff;
+    --text-main: #2c2c2c;
+    --text-muted: #666666;
+    --primary: #b33939;
+    /* Japanese Red */
+    --secondary: #2f3640;
+    /* Ink Black */
+    --accent: #d4af37;
+    /* Gold Leaf */
+    --glass: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+    --shadow-sharp: 0 5px 15px rgba(0, 0, 0, 0.15);
+    /* Typography */
+    --font-display: 'Cinzel', serif;
+    --font-body: 'Cormorant Garamond', serif;
+    --font-ui: 'Montserrat', sans-serif;
+    /* Spacing */
+    --container-width: 1200px;
+    --space-xs: 8px;
+    --space-md: 24px;
+    --space-xl: 64px;
+    --space-xxl: 128px;
+}
+
+
+/* Dark Mode Hack via Checkbox Logic */
+
+#theme-switch:checked~.wrapper {
+    --bg-body: #0f0f12;
+    --bg-paper: #1a1a1f;
+    --text-main: #e0e0e0;
+    --text-muted: #a0a0a0;
+    --primary: #ff5252;
+    --secondary: #ffffff;
+    --glass: rgba(20, 20, 25, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+
+/* ====================================================================
+        RESET & BASE STYLES
+        ====================================================================
+        */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    line-height: 1.8;
+    overflow-x: hidden;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+
+/* Custom Scrollbar */
+
+ ::-webkit-scrollbar {
+    width: 8px;
+}
+
+ ::-webkit-scrollbar-track {
+    background: var(--bg-body);
+}
+
+ ::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+}
+
+
+/* Selection Color */
+
+ ::selection {
+    background: var(--primary);
+    color: white;
+}
+
+
+/* ====================================================================
+        UTILITY CLASSES & ANIMATIONS
+        ====================================================================
+        */
+
+.wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.container {
+    width: 90%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+
+/* Loader Animation */
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-body);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeOut 1s ease-in-out 2.5s forwards;
+    pointer-events: none;
+}
+
+.enso-circle {
+    width: 100px;
+    height: 100px;
+    border: 2px solid transparent;
+    border-top: 2px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+
+/* Typography Utilities */
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+}
+
+.display-text {
+    font-size: clamp(3rem, 8vw, 6rem);
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: var(--space-md);
+}
+
+.section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    text-align: center;
+    margin-bottom: var(--space-xl);
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--primary);
+    margin: 20px auto 0;
+}
+
+
+/* ====================================================================
+        NAVIGATION & HEADER
+        ====================================================================
+        */
+
+.nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.logo {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: var(--secondary);
+    letter-spacing: 2px;
+    z-index: 101;
+    /* Above toggle */
+}
+
+
+/* Checkbox Hack for Theme Switch */
+
+.theme-toggle-label {
+    cursor: pointer;
+    width: 50px;
+    height: 26px;
+    background: var(--secondary);
+    border-radius: 50px;
+    position: relative;
+    margin-right: 20px;
+}
+
+.theme-toggle-label::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 22px;
+    height: 22px;
+    background: var(--bg-body);
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+#theme-switch {
+    display: none;
+}
+
+#theme-switch:checked+.theme-toggle-label::after {
+    left: 26px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    font-weight: 600;
+}
+
+.nav-links a::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::before {
+    width: 100%;
+}
+
+
+/* ====================================================================
+        SECTION 1: HERO PARALLAX
+        ====================================================================
+        */
+
+.hero {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-image: url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    /* Parallax Magic */
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), var(--bg-body));
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    /* Always white on hero image */
+    animation: fadeInUp 1.5s ease-out 2.8s forwards;
+    opacity: 0;
+}
+
+.hero-content h1 {
+    color: #ffffff;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.hero-subtitle {
+    font-family: var(--font-ui);
+    font-size: 1.2rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.btn-main {
+    display: inline-block;
+    padding: 15px 40px;
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    font-family: var(--font-ui);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 0;
+    /* Sharp edges for elegance */
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-main:hover {
+    background: var(--secondary);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 2rem;
+    animation: float 2s infinite ease-in-out;
+    z-index: 2;
+    opacity: 0.8;
+}
+
+
+/* ====================================================================
+        SECTION 2: INTRO & TEXT (Drop Caps)
+        ====================================================================
+        */
+
+.intro-section {
+    padding: var(--space-xxl) 0;
+}
+
+.intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.intro-text p {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+    color: var(--text-muted);
+}
+
+.drop-cap {
+    float: left;
+    font-family: var(--font-display);
+    font-size: 6rem;
+    line-height: 0.8;
+    padding-right: 15px;
+    color: var(--primary);
+}
+
+.intro-image-wrapper {
+    position: relative;
+}
+
+.intro-image {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    filter: grayscale(20%);
+    transition: filter 0.5s;
+    box-shadow: var(--shadow-soft);
+}
+
+.intro-image:hover {
+    filter: grayscale(0%);
+}
+
+.intro-badge {
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    background: var(--bg-paper);
+    padding: 20px;
+    box-shadow: var(--shadow-sharp);
+    border: 1px solid var(--accent);
+}
+
+.intro-badge span {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--secondary);
+}
+
+
+/* ====================================================================
+        SECTION 3: SIGHTS (ADVANCED CARDS)
+        ====================================================================
+        */
+
+.sights-section {
+    background-color: var(--secondary);
+    color: var(--bg-body);
+    padding: var(--space-xxl) 0;
+    position: relative;
+}
+
+.sights-section .section-title {
+    color: white;
+}
+
+.sights-section .section-title::after {
+    background: var(--accent);
+}
+
+
+/* Using UL as a grid container */
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    list-style: none;
+    padding: 0;
+}
+
+.card-item {
+    position: relative;
+    height: 400px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+}
+
+.card-item:hover {
+    transform: translateY(-10px);
+}
+
+.card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.6s ease;
+}
+
+
+/* Background Images via CSS */
+
+.card-1 .card-bg {
+    background-image: url('https://images.unsplash.com/photo-1624253321171-1be53e12f5f4?q=80&w=1000&auto=format&fit=crop');
+}
+
+.card-2 .card-bg {
+    background-image: url('https://images.unsplash.com/photo-1578469550956-0e16b69c6a3d?q=80&w=1000&auto=format&fit=crop');
+}
+
+.card-3 .card-bg {
+    background-image: url('https://images.unsplash.com/photo-1490761668535-35497054764d?q=80&w=1000&auto=format&fit=crop');
+}
+
+.card-item:hover .card-bg {
+    transform: scale(1.1);
+}
+
+.card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    color: white;
+    transform: translateY(20px);
+    transition: transform 0.4s;
+}
+
+.card-item:hover .card-content {
+    transform: translateY(0);
+}
+
+.card-num {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--accent);
+    opacity: 0.5;
+    line-height: 1;
+    position: absolute;
+    top: -40px;
+    right: 20px;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-family: var(--font-display);
+}
+
+.card-desc {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    font-family: var(--font-ui);
+}
+
+
+/* ====================================================================
+        SECTION 4: SCHEDULE (COMPLEX TABLE)
+        ====================================================================
+        */
+
+.schedule-section {
+    padding: var(--space-xxl) 0;
+    background-image: radial-gradient(var(--secondary) 1px, transparent 1px);
+    background-size: 20px 20px;
+    /* Dot pattern */
+}
+
+.glass-table-container {
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+thead th {
+    font-family: var(--font-ui);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    padding: 20px;
+    text-align: left;
+    border-bottom: 2px solid var(--primary);
+}
+
+tbody td {
+    padding: 20px;
+    font-family: var(--font-ui);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: background 0.2s;
+    color: var(--text-main);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:hover td {
+    background: rgba(var(--primary), 0.05);
+}
+
+
+/* Stylized badges inside table */
+
+.tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.tag.adult {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.tag.child {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.tag.free {
+    background: #d4edda;
+    color: #155724;
+}
+
+.price {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+
+
+/* Special merging styles */
+
+td[rowspan] {
+    vertical-align: middle;
+    background: rgba(0, 0, 0, 0.02);
+    font-weight: bold;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    border-right: 1px dashed #ccc;
+}
+
+
+/* ====================================================================
+        SECTION 5: ROUTE (TIMELINE LIST)
+        ====================================================================
+        */
+
+.route-section {
+    padding: var(--space-xxl) 0;
+}
+
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+
+/* Vertical Line */
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 20px;
+    width: 2px;
+    background: var(--text-muted);
+    opacity: 0.3;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 50px;
+    padding-left: 60px;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 11px;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+    background: var(--primary);
+    border: 4px solid var(--bg-body);
+    border-radius: 50%;
+    z-index: 2;
+    box-shadow: 0 0 0 2px var(--primary);
+}
+
+.timeline-time {
+    font-family: var(--font-ui);
+    font-weight: 800;
+    color: var(--primary);
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.timeline-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.sub-list {
+    margin-top: 15px;
+    list-style: none;
+    background: var(--bg-paper);
+    padding: 20px;
+    border-left: 3px solid var(--accent);
+    box-shadow: var(--shadow-sharp);
+}
+
+.sub-list li {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.sub-list li::before {
+    content: '➢';
+    color: var(--accent);
+    margin-right: 10px;
+    font-size: 0.8rem;
+}
+
+
+/* ====================================================================
+        FOOTER (ADVANCED TABLE LAYOUT)
+        ====================================================================
+        */
+
+footer {
+    background: #111;
+    color: #fff;
+    padding-top: var(--space-xxl);
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+}
+
+.footer-layout-table {
+    width: 100%;
+    border: none;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+}
+
+.footer-layout-table td {
+    vertical-align: top;
+    padding: 20px;
+    border: none;
+    /* Override default table styles */
+    width: 33.33%;
+}
+
+.footer-logo {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    display: block;
+    color: white;
+}
+
+.footer-links a {
+    display: block;
+    color: #888;
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--primary);
+    padding-left: 5px;
+}
+
+.footer-bottom {
+    background: #000;
+    text-align: center;
+    padding: 20px;
+    color: #555;
+    font-size: 0.8rem;
+}
+
+
+/* ====================================================================
+        MEDIA QUERIES (RESPONSIVE)
+        ====================================================================
+        */
+
+@media (max-width: 900px) {
+    .display-text {
+        font-size: 3.5rem;
+    }
+    .intro-grid {
+        grid-template-columns: 1fr;
+    }
+    .intro-badge {
+        display: none;
+    }
+    .nav-links {
+        display: none;
+    }
+    /* Hide menu on mobile for simplicity */
+    .footer-layout-table td {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+    td[rowspan] {
+        border-right: none;
+        border-bottom: 1px solid #ccc;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    .glass-table-container {
+        padding: 10px;
+        overflow-x: auto;
+    }
+    td,
+    th {
+        padding: 10px;
+        font-size: 0.8rem;
+    }
+}
+
+</style></head><body><div class="loader"><div class="enso-circle"></div></div><input type="checkbox" id="theme-switch"><div class="wrapper"><nav class="nav-bar"><div class="logo">KYOTO.</div><div style="display: flex; align-items: center;"><label for="theme-switch" class="theme-toggle-label" title="Switch Theme"></label><ul class="nav-links"><li><a href="#about">О городе</a></li><li><a href="#sights">Места</a></li><li><a href="#schedule">Цены</a></li><li><a href="#route">Маршрут</a></li></ul></div></nav><header class="hero"><div class="hero-overlay"></div><div class="hero-content"><p class="hero-subtitle">The Ancient Capital</p><h1 class="display-text">Soul of<br>Japan</h1><a href="#schedule" class="btn-main">Исследовать</a></div><div class="scroll-indicator">↓</div></header><section id="about" class="intro-section"><div class="container"><div class="intro-grid"><div class="intro-text"><h2 class="section-title" style="text-align: left; left: 0; transform: none;">История Вечности</h2><p><span class="drop-cap">К</span>иото — это не просто город. Это музей под открытым небом,
+где каждый камень хранит тысячелетнюю мудрость. С 794 по 1869 год он был императорской столицей Японии,
+сердцем культуры,
+религии и власти. </p><p>Здесь время течет иначе. Шум современных мегаполисов уступает место шелесту бамбуковых рощ и звону колоколов в буддийских храмах. <a href="https://ru.wikipedia.org/wiki/Киото" target="_blank" style="color: var(--primary); font-weight: bold;">Узнать больше в Википедии</a>. </p></div><div class="intro-image-wrapper"><img src="https://cdn.getyourguide.com/img/tour/17c268a96c31af64.jpeg/155.jpg" alt="Geisha District" class="intro-image"><div class="intro-badge"><span>1600+</span>Храмов </div></div></div></div></section><section id="sights" class="sights-section"><div class="container"><h2 class="section-title">Избранные Локации</h2><ul class="cards-grid"><li class="card-item card-1"><div class="card-bg"></div><div class="card-content"><span class="card-num">01</span><h3 class="card-title">Кинкаку-дзи</h3><p class="card-desc">Знаменитый Золотой павильон,
+отражающийся в Зеркальном озере.</p></div></li><li class="card-item card-2"><div class="card-bg"></div><div class="card-content"><span class="card-num">02</span><h3 class="card-title">Фусими Инари</h3><p class="card-desc">Бесконечный коридор из тысяч красных ворот Тории,
+ведущих на гору.</p></div></li><li class="card-item card-3"><div class="card-bg"></div><div class="card-content"><span class="card-num">03</span><h3 class="card-title">Арасияма</h3><p class="card-desc">Мистическая бамбуковая роща,
+где свет играет с тенями.</p></div></li></ul></div></section><section id="schedule" class="schedule-section"><div class="container"><h2 class="section-title">Билеты и Расписание</h2><div class="glass-table-container"><table><thead><tr><th width="30%">Локация</th><th>Тип билета</th><th>Режим работы</th><th>Стоимость</th></tr></thead><tbody><tr><td rowspan="2">Золотой Павильон<br><span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">(Kinkaku-ji)</span></td><td><span class="tag adult">Взрослый</span></td><td rowspan="2">09:00 — 17:00<br><small>Ежедневно</small></td><td class="price">¥400</td></tr><tr><td><span class="tag child">Детский</span></td><td class="price">¥300</td></tr><tr><td rowspan="3">Замок Нидзё<br><span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">(Nijo Castle)</span></td><td><span class="tag adult">Взрослый+Сад</span></td><td>08:45 — 16:00</td><td class="price">¥1030</td></tr><tr><td><span class="tag child">Студенческий</span></td><td colspan="2" style="background: rgba(0,0,0,0.03); text-align: center; font-style: italic;">Требуется ID карта </td></tr><tr><td><span class="tag free">До 6 лет</span></td><td>Все время</td><td class="price">Free</td></tr><tr><td colspan="4" style="text-align: center; color: var(--text-muted); padding-top: 30px; font-size: 0.8rem; border: none;">* Цены могут меняться в сезон сакуры (апрель) и момидзи (ноябрь). </td></tr></tbody></table></div></div></section><section id="route" class="route-section"><div class="container"><h2 class="section-title">Маршрут "Дух Дзен"</h2><div class="timeline"><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">08:00 AM</div><div class="timeline-content"><h3>Утро в Гионе</h3><p>Начните день,
+когда улицы еще пусты. Район гейш спит,
+но архитектура матия (деревянных домов) прекрасна.</p></div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">10:30 AM</div><div class="timeline-content"><h3>Храм Чистой Воды</h3><p>Киёмидзу-дэра — храм на сваях. Обязательно выполните ритуал:</p><ul class="sub-list"><li>Выпить из водопада Отова (Здоровье,
+Любовь,
+Успех).</li><li>Пройти с закрытыми глазами между камнями любви.</li><li>Купить амулет Омамори.</li></ul></div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-time">01:00 PM</div><div class="timeline-content"><h3>Кайсэки Ланч</h3><p>Традиционный обед из множества маленьких блюд. Высокая кухня Японии.</p></div></div></div></div></section><footer><div class="container"><table class="footer-layout-table"><tr><td><span class="footer-logo">KYOTO.</span><p style="color: #666; line-height: 1.6;">Проект создан с любовью к японской культуре.<br>"Ичиго Ичиэ" — одна встреча,
+одна возможность. </p></td><td><h4 style="margin-bottom: 20px;">Навигация</h4><div class="footer-links"><a href="#">Главная</a><a href="#">Галерея</a><a href="#">Бронирование</a><a href="#">Контакты</a></div></td><td><h4 style="margin-bottom: 20px;">Связь</h4><p style="color: #888;">Tokyo Pref.,
+Japan<br>+81 90 1234 5678<br>info@kyoto-guide.jp </p><div style="margin-top: 20px;"><span style="display:inline-block; width:30px; height:30px; background:#333; border-radius:50%; margin-right:10px;"></span><span style="display:inline-block; width:30px; height:30px; background:#333; border-radius:50%;"></span></div></td></tr></table></div><div class="footer-bottom">&copy;
+2025 Kyoto Travel Guide. Student Project. All rights reserved by Nsanov Beksultan. </div></footer></div></body></html>
