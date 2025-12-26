@@ -867,8 +867,6 @@ a.hero-fix-btn {
     min-height: 0;
     
     opacity: 0;
-    user-select: none;
-    pointer-events: none;
     overflow: hidden;
 
     display: flex;
